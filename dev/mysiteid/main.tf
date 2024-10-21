@@ -16,7 +16,7 @@ module "base" {
     },
     {
       name        = "HOST2",
-      ipv4Address = "192.168.1.13"
+      ipv4_address = "192.168.1.13"
     }
   ]
   management_adapters = ["FABRIC", "FABRIC2"]
