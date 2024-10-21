@@ -1,35 +1,35 @@
 module "base" {
   source           = "../../modules/runyutesttemplate"
-  location         = "<location>"
+  location         = "eastus"
   site_id          = basename(abspath(path.module))
-  domain_fqdn      = "<domainFqdn>"
-  starting_address = "<startingAddress>"
-  ending_address   = "<endingAddress>"
-  default_gateway  = "<defaultGateway>"
-  dns_servers      = ["<dnsServer1>"]
-  adou_suffix      = "<adouSuffix>"
-  dc_ip            = "<domainControllerIp>"
+  domain_fqdn      = "jumpstart.local"
+  starting_address = "192.168.1.55"
+  ending_address   = "192.168.1.65"
+  default_gateway  = "192.168.1.1"
+  dns_servers      = ["192.168.1.254"]
+  adou_suffix      = "DC=jumpstart,DC=local"
+  dc_ip            = "192.168.1.100"
   servers = [
     {
-      name         = "<server1Name>",
-      ipv4_address = "<server1Ipv4Address>"
+      name         = "HOST1",
+      ipv4_address = "192.168.1.12"
     },
     {
-      name        = "<server2Name>",
-      ipv4Address = "<server2Ipv4Address>"
+      name        = "HOST2",
+      ipv4Address = "192.168.1.13"
     }
   ]
-  management_adapters = ["<managementAdapter1>", "<managementAdapter2>"]
+  management_adapters = ["FABRIC", "FABRIC2"]
   storage_networks = [
     {
       name               = "Storage1Network",
-      networkAdapterName = "<storageAdapter1>",
-      vlanId             = "<storageAdapter1Vlan>"
+      networkAdapterName = "StorageA",
+      vlanId             = "711"
     },
     {
       name               = "Storage2Network",
-      networkAdapterName = "<storageAdapter2>",
-      vlanId             = "<storageAdapter2Vlan>"
+      networkAdapterName = "StorageB",
+      vlanId             = "712"
     }
   ]
   rdma_enabled                    = false     // Change to true if RDMA is enabled.
@@ -47,15 +47,15 @@ module "base" {
   rp_service_principal_object_id  = var.rp_service_principal_object_id
 
   # Region HCI logical network parameters
-  lnet_starting_address = "<lnetStartingAddress>"
-  lnet_ending_address   = "<lnetEndingAddress>"  # This IP range should not overlap with HCI infra IP range.
-  lnet_address_prefix   = "<lnetAddressPrefix>"  # E.g., 192.168.1.0/24
-  lnet_default_gateway  = "<lnetDefaultGateway>" # Default gateway can be same as HCI infra default gateway.
-  lnet_dns_servers      = ["<lnetDnsServer1>"]   # DNS servers can be same as HCI infra DNS servers.
+  lnet_starting_address = "192.168.1.171"
+  lnet_ending_address   = "192.168.1.190"   # This IP range should not overlap with HCI infra IP range.
+  lnet_address_prefix   = "192.168.1.0/24"  # E.g., 192.168.1.0/24
+  lnet_default_gateway  = "192.168.1.1"     # Default gateway can be same as HCI infra default gateway.
+  lnet_dns_servers      = ["192.168.1.254"] # DNS servers can be same as HCI infra DNS servers.
 
   # Region AKS Arc parameters
-  aks_arc_control_plane_ip    = "<aksArcControlPlanIp>"      # An IP address in the logical network IP range.
-  rbac_admin_group_object_ids = ["<rbacAdminGroupObjectId>"] # An AAD group that will have the admin permission of this AKS Arc cluster. Check ./doc/AKS-Arc-Admin-Groups.md for details
+  aks_arc_control_plane_ip    = "192.168.1.190"      # An IP address in the logical network IP range.
+  rbac_admin_group_object_ids = ["11111111-6655-4844-9922-030049995000"] # An AAD group that will have the admin permission of this AKS Arc cluster. Check ./doc/AKS-Arc-Admin-Groups.md for details
 
   # Region HCI VM parameters
   # Uncomment this section will create a windows server VM on HCI.
