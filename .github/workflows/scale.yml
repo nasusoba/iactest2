@@ -16,6 +16,8 @@ on:
 permissions:
   contents: write
   id-token: write
+  pull-requests: write
+  issues: write
 
 jobs:
   scale:
@@ -68,4 +70,4 @@ jobs:
         git add .
         git commit -m "Scale more sites according to .azure/scale.csv"
         git push
-    
+ 
